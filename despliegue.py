@@ -2,6 +2,34 @@ import streamlit as st
 import requests
 import json
 
+import requests
+
+st.set_page_config(
+    page_title="Multipage App",
+    page_icon="👋",
+)
+
+st.title("Main Page")
+st.sidebar.success("Select a page above.")
+
+if "my_input" not in st.session_state:
+    st.session_state["my_input"] = ""
+
+my_input = st.text_input("Input a text here", st.session_state["my_input"])
+
+submit = st.button("Submit")
+if submit:
+    st.session_state["my_input"] = my_input
+    st.write("You have entered: ", my_input)
+
+url = "https://api.themoviedb.org/3/authentication"
+
+headers = {"accept": "application/json"}
+
+response = requests.get(url, headers=headers)
+
+print(response.text)
+
 # Título de la página
 st.title("50 videojuegos que deberías probar")
 
